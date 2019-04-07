@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-socat-deployment
+  labels:
+    app: hello-socat
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hello-socat
+  template:
+    metadata:
+      labels:
+        app: hello-socat
+    spec:
+      containers:
+      - name: hello-socat
+        image: alpine/socat
+        resources:
+          requests:
+            memory: 200M
+            cpu: 10m
+        command:
+        - /bin/sh
+        - -c
+        - |
+          trap 'echo bye ; exit' TERM
+          (
+          while true; do
+            (
+            printf "HTTP/1.0 200 OK\r\n"
+            printf "X-node: $NODE_NAME\r\n"
+            printf "X-pod: $POD_NAME\r\n"
+            printf "X-namespace: $POD_NAMESPACE\r\n"
+            printf "\r\n"
+            printf "Hello World - v1.0\n"
+            ) | socat tcp-listen:80,reuseaddr stdio
+          done
+          )&
+          while true; do
+            sleep 1
+          done
+        ports:
+        - containerPort: 80
+        env:
+          - name: NODE_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.nodeName
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          - name: POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          - name: POD_IP
+            valueFrom:
+              fieldRef:
+                fieldPath: status.podIP

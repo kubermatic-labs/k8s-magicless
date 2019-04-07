@@ -1,0 +1,8 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: external-counter
+spec:
+  type: ExternalName
+  externalName: api.fancy-counter.example.com
