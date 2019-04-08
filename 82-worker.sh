@@ -130,7 +130,7 @@ kubectl --kubeconfig admin.kubeconfig apply -f vendor/calico.yaml
 # or apply directly from https://docs.projectcalico.org/v3.6/getting-started/kubernetes/installation/hosted/kubernetes-datastore/calico-networking/1.7/calico.yaml
 
 # dns:
-kubectl --kubeconfig admin.kubeconfig -f vendor/coredns.yaml
+kubectl --kubeconfig admin.kubeconfig apply -f vendor/coredns.yaml
 
 ##########################################################
 # alternatively: the harder way / manual:
