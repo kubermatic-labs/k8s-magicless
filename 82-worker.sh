@@ -1,6 +1,6 @@
 #!/bin/false
 # this is meant to be run on each worker node
-# (use tmux sync panes)
+# (use tmux sync panes) and git clone https://github.com/USER/REPO.git
 
 kube_ver="1.14.0"
 
@@ -42,6 +42,8 @@ sudo install -o 0:0 -m 0644 ca.pem /var/lib/kubernetes/
 
 POD_CIDR=$(curl -s -H "Metadata-Flavor: Google" \
   http://metadata.google.internal/computeMetadata/v1/instance/attributes/pod-cidr)
+
+# https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet/
 
 cat <<EOF | sudo tee /var/lib/kubelet/kubelet-config.yaml
 kind: KubeletConfiguration
