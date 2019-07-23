@@ -6,6 +6,8 @@
 # gcloud projects list
 # gcloud config set project PROJECT_ID
 
+### see https://cloud.google.com/compute/docs/regions-zones/
+# london
 gcloud config set compute/region europe-west2
 gcloud config set compute/zone europe-west2-a
 
