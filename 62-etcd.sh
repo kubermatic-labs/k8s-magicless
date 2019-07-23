@@ -1,6 +1,6 @@
 #!/bin/false
 # this is meant to be run on each master node
-# (use tmux sync panes)
+# (use tmux sync panes) and git clone https://github.com/USER/REPO.git
 
 etcd_ver=3.3.12
 
