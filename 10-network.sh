@@ -1,5 +1,11 @@
 #!/bin/bash
 
+### ensure the correct gcp project is set:
+# gcloud config list
+### if not run
+# gcloud projects list
+# gcloud config set project PROJECT_ID
+
 gcloud config set compute/region europe-west2
 gcloud config set compute/zone europe-west2-a
 
