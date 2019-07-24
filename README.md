@@ -6,3 +6,12 @@ So within this repository there is all the material to get a Kubernetes cluster 
 
 This is (obviously) derived from https://github.com/kelseyhightower/kubernetes-the-hard-way where you can also find more of a README.
 
+- - -
+
+### NOTE
+
+If you are using [Google Cloud Sheel](https://console.cloud.google.com/cloudshell/) **DISABLE TMUX SUPPORT**
+
+![disable-tmux](.pics/disable_tmux_gcloud_console.png)
+
+After the setting close the window and open a **NEW** cloud shell!

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+### NOTE!!!
+# on gcloud shell, disable tmux!!! see README.md#note
 
 tmux new-session -d -s magicless-worker
 tmux split-window -t magicless-worker:0.0
