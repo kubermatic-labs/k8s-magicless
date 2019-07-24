@@ -3,6 +3,8 @@
 ### NOTE!!!
 # on gcloud shell, disable tmux!!! see README.md#note
 
+# TMUX cheatsheet: https://gist.github.com/MohamedAlaa/2961058
+
 tmux new-session -d -s magicless-worker
 tmux split-window -t magicless-worker:0.0
 tmux split-window -t magicless-worker:0.0

@@ -1,5 +1,10 @@
 #!/bin/bash
 
+### NOTE!!!
+# on gcloud shell, disable tmux!!! see README.md#note
+
+# TMUX cheatsheet: https://gist.github.com/MohamedAlaa/2961058
+
 
 tmux new-session -d -s magicless-master
 tmux split-window -t magicless-master:0.0
