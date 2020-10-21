@@ -86,4 +86,3 @@ mkcert service-accounts service-account Kubernetes ""
 
 # and finally, apiserver:
 mkcert kubernetes kubernetes system:masters 10.32.0.1,kubernetes.default,127.0.0.1,10.254.254.100,10.254.254.101,10.254.254.102,$(public_ip)
-

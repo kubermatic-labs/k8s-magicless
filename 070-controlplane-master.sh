@@ -22,7 +22,6 @@ sudo install -o 0:0 -m 0600 ca-key.pem kubernetes-key.pem service-account-key.pe
 INTERNAL_IP=$( curl -s -H "Metadata-Flavor: Google" \
  http://metadata.google.internal/computeMetadata/v1/instance/network-interfaces/0/ip)
 
-
 # https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/
 
 cat <<EOF | sudo tee /etc/systemd/system/kube-apiserver.service
@@ -125,7 +124,6 @@ clientConnection:
 leaderElection:
   leaderElect: true
 EOF
-
 
 sudo systemctl daemon-reload
 sudo systemctl enable kube-apiserver kube-controller-manager kube-scheduler

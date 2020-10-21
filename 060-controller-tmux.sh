@@ -7,7 +7,6 @@ set -euxo pipefail
 
 # TMUX cheatsheet: https://gist.github.com/MohamedAlaa/2961058
 
-
 tmux new-session -d -s magicless-master
 tmux split-window -t magicless-master:0.0
 tmux split-window -t magicless-master:0.0

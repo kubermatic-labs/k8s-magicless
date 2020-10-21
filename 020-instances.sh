@@ -24,7 +24,6 @@ for i in 0 1 2; do
     --tags magicless,controller $addr_arg
 done
 
-
 # worker nodes
 for i in 0 1 2; do
   gcloud compute instances create worker-${i} \
@@ -42,4 +41,3 @@ for i in 0 1 2; do
 done
 
 gcloud compute instances list
-

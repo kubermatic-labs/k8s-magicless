@@ -25,7 +25,6 @@ mkkubecfg() {
     kubectl config use-context default --kubeconfig=$kc
 }
 
-
 # worker kubeconfs:
 mkkubecfg worker-0.kubeconfig system:node:worker-0 worker-0
 mkkubecfg worker-1.kubeconfig system:node:worker-1 worker-1
