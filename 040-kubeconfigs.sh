@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euxo pipefail
+
 . ./func.sh
 
 public=$( public_ip )
@@ -22,7 +24,6 @@ mkkubecfg() {
 
     kubectl config use-context default --kubeconfig=$kc
 }
-
 
 # worker kubeconfs:
 mkkubecfg worker-0.kubeconfig system:node:worker-0 worker-0

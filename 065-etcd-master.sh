@@ -2,7 +2,9 @@
 # this is meant to be run on each master node
 # (use tmux sync panes) and git clone https://github.com/USER/REPO.git
 
-etcd_ver=3.3.12
+set -euxo pipefail
+
+etcd_ver=3.4.13
 
 wget -q --show-progress --https-only --timestamping \
   "https://github.com/coreos/etcd/releases/download/v$etcd_ver/etcd-v$etcd_ver-linux-amd64.tar.gz"
@@ -53,10 +55,8 @@ sudo systemctl daemon-reload
 sudo systemctl enable etcd
 sudo systemctl start etcd
 
-
 ETCDCTL_API=3 etcdctl member list \
   --endpoints=https://127.0.0.1:2379 \
   --cacert=/etc/etcd/ca.pem \
   --cert=/etc/etcd/kubernetes.pem \
   --key=/etc/etcd/kubernetes-key.pem
-

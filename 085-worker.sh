@@ -2,7 +2,9 @@
 # this is meant to be run on each worker node
 # (use tmux sync panes) and git clone https://github.com/USER/REPO.git
 
-kube_ver="1.14.0"
+set -euxo pipefail
+
+kube_ver="1.19.3"
 
 sudo apt-get update
 sudo apt-get -y install socat conntrack ipset apt-transport-https \
@@ -23,8 +25,12 @@ ExecStart=
 ExecStart=/usr/bin/dockerd -H fd://  --iptables=false --ip-masq=false
 EOF
 
-sudo apt-get install -y "docker-ce=18.06*" "kubectl=${kube_ver}*"
-sudo apt-mark hold docker-ce
+sudo apt-get install -y \
+  containerd.io=1.2.13-2 \
+  docker-ce=5:19.03.11~3-0~ubuntu-$(lsb_release -cs) \
+  docker-ce-cli=5:19.03.11~3-0~ubuntu-$(lsb_release -cs) \
+  "kubectl=${kube_ver}*"
+sudo apt-mark hold containerd.io docker-ce docker-ce-cli
 
 sudo mkdir -p \
   /var/lib/kubelet /var/lib/kube-proxy \
@@ -124,52 +130,3 @@ sudo systemctl start kubelet kube-proxy
 
 # kubectl --kubeconfig admin.kubeconfig get nodes
 
-# we have workers... CNI missing to get ready:
-
-##########################################################
-# calico
-kubectl --kubeconfig admin.kubeconfig apply -f vendor/calico.yaml
-# or apply directly from https://docs.projectcalico.org/v3.6/getting-started/kubernetes/installation/hosted/kubernetes-datastore/calico-networking/1.7/calico.yaml
-
-# dns:
-kubectl --kubeconfig admin.kubeconfig apply -f vendor/coredns.yaml
-
-##########################################################
-# alternatively: the harder way / manual:
-sudo mkdir -p /etc/cni/net.d /opt/cni/bin
-cni_ver=v0.7.5
-wget -q --show-progress --https-only --timestamping \
-  https://github.com/containernetworking/plugins/releases/download/$cni_ver/cni-plugins-amd64-$cni_ver.tgz
-
-sudo tar -xvf cni-plugins-amd64-$cni_ver.tgz -C /opt/cni/bin/
-
-POD_CIDR=$(curl -s -H "Metadata-Flavor: Google" \
-  http://metadata.google.internal/computeMetadata/v1/instance/attributes/pod-cidr)
-
-cat <<EOF | sudo tee /etc/cni/net.d/10-bridge.conf
-{
-    "cniVersion": "0.3.1",
-    "name": "bridge",
-    "type": "bridge",
-    "bridge": "cnio0",
-    "isGateway": true,
-    "ipMasq": true,
-    "ipam": {
-        "type": "host-local",
-        "ranges": [
-          [{"subnet": "${POD_CIDR}"}]
-        ],
-        "routes": [{"dst": "0.0.0.0/0"}]
-    }
-}
-EOF
-
-cat <<EOF | sudo tee /etc/cni/net.d/99-loopback.conf
-{
-    "cniVersion": "0.3.1",
-    "type": "loopback"
-}
-EOF
-
-
-exit 0

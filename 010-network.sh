@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euxo pipefail
+
 ### ensure the correct gcp project is set:
 # gcloud config list
 ### if not run
