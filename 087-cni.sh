@@ -1,19 +1,9 @@
-#!/bin/bash
+#!/bin/false
+# this is meant to be run on each worker node
+# (use tmux sync panes) and git clone https://github.com/USER/REPO.git
 
 set -euxo pipefail
 
-# we have workers... CNI missing to get ready:
-
-# ##########################################################
-# # calico
-# kubectl --kubeconfig admin.kubeconfig apply -f vendor/calico.yaml
-# # or apply directly from https://docs.projectcalico.org/v3.6/getting-started/kubernetes/installation/hosted/kubernetes-datastore/calico-networking/1.7/calico.yaml
-
-# # dns:
-# kubectl --kubeconfig admin.kubeconfig apply -f vendor/coredns.yaml
-
-# ##########################################################
-# # alternatively: the harder way / manual:
 sudo mkdir -p /etc/cni/net.d /opt/cni/bin
 cni_ver=v0.8.7
 wget -q --show-progress --https-only --timestamping \

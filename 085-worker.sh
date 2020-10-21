@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/false
 # this is meant to be run on each worker node
 # (use tmux sync panes) and git clone https://github.com/USER/REPO.git
 
