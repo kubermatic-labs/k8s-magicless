@@ -1,8 +1,10 @@
-#!/bin/false
+#!/bin/bash
 # this is meant to be run on each master node
 # (use tmux sync panes) and git clone https://github.com/USER/REPO.git
 
-etcd_ver=3.3.12
+set -euxo pipefail
+
+etcd_ver=3.4.13
 
 wget -q --show-progress --https-only --timestamping \
   "https://github.com/coreos/etcd/releases/download/v$etcd_ver/etcd-v$etcd_ver-linux-amd64.tar.gz"

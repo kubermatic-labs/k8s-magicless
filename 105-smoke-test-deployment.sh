@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euxo pipefail
+
 export KUBECONFIG=./admin.kubeconfig
 
 kubectl run nginx --image=nginx

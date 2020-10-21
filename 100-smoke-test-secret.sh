@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euxo pipefail
+
 kubectl --kubeconfig ./admin.kubeconfig create secret generic "magicless" \
   --from-literal="mykey=mydata"
 

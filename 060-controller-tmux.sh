@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euxo pipefail
+
 ### NOTE!!!
 # on gcloud shell, disable tmux!!! see README.md#note
 

@@ -4,6 +4,8 @@
 # * `go get github.com/cloudflare/cfssl/cmd/{cfssl,cfssljson}` [needs golang-1.11 + git]
 # * package from ubuntu-18.04 (`golang-cfssl`)
 
+set -euxo pipefail
+
 . ./func.sh
 
 cat > ca-csr.json <<EOF

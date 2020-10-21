@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euxo pipefail
+
 # get public ip
 public=$(gcloud compute addresses describe magicless-ip-address \
   --region $(gcloud config get-value compute/region) \
@@ -13,7 +15,7 @@ for i in 0 1 2; do
     --async \
     --boot-disk-size 200GB \
     --can-ip-forward \
-    --image-family ubuntu-1804-lts \
+    --image=ubuntu-2004-focal-v20201014 \
     --image-project ubuntu-os-cloud \
     --machine-type n1-standard-2 \
     --private-network-ip 10.254.254.10$i \
@@ -29,7 +31,7 @@ for i in 0 1 2; do
     --async \
     --boot-disk-size 200GB \
     --can-ip-forward \
-    --image-family ubuntu-1804-lts \
+    --image=ubuntu-2004-focal-v20201014 \
     --image-project ubuntu-os-cloud \
     --machine-type n1-standard-1 \
     --metadata pod-cidr=192.168.1${i}.0/24 \

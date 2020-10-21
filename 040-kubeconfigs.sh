@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euxo pipefail
+
 . ./func.sh
 
 public=$( public_ip )

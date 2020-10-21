@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euxo pipefail
+
 # fortunately gcloud util can help with deploying to the nodes:
 for node in worker-{0..2}; do
 	gcloud compute scp ca.pem ${node}{,-key}.pem $node:

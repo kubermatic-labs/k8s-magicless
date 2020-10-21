@@ -1,6 +1,8 @@
 #!/bin/bash
 # some snippets you might not even need. (depends on your CNI choice)
 
+set -euxo pipefail
+
 # just list instance addresses
 for node in worker-{0..2}; do
   gcloud compute instances describe ${node} \
